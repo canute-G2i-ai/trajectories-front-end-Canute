@@ -96,6 +96,7 @@ type ErrorFlagKey =
   | "ignoredFeedback"
   | "prematureConclusion"
   | "scopeCreep"
+  | "deviation"
   | "na"
   | "other";
 
@@ -107,6 +108,7 @@ const createInitialErrorFlags = (): Record<ErrorFlagKey, boolean> => ({
   ignoredFeedback: false,
   prematureConclusion: false,
   scopeCreep: false,
+  deviation: false,
   na: false,
   other: false,
 });
@@ -243,6 +245,7 @@ export const AnnotationForm = ({
           ignoredfeedback: "ignoredFeedback",
           prematureconclusion: "prematureConclusion",
           scopecreep: "scopeCreep",
+          deviation: "deviation",
           na: "na",
           other: "other",
         };
@@ -563,13 +566,16 @@ export const AnnotationForm = ({
                 Correct: Appropriate action for the current state
               </SelectItem>
               <SelectItem value="suboptimal">
-                Suboptimal but Valid: Correct direction but inefficient
+                Suboptimal but Valid: Action has correct direction but is inefficient
               </SelectItem>
               <SelectItem value="incorrect">
-                Incorrect: Wrong action that doesn't help or hinders progress
+                Incorrect: Wrong action that doesn't help, is incomplete and wrong, or hinders progress
               </SelectItem>
               <SelectItem value="redundant">
                 Redundant: Repeating a previous action unnecessarily
+              </SelectItem>
+              <SelectItem value="cannot-validate">
+                Cannot Validate: Correctness depends on information external to the task. EX: "File created successfully" when file/directory cannot be explored or validated based on information in the task.
               </SelectItem>
             </SelectContent>
           </Select>
@@ -596,7 +602,7 @@ export const AnnotationForm = ({
                 Clear & Logical: Well-reasoned, shows understanding
               </SelectItem>
               <SelectItem value="partial">
-                Partially Clear: Some logic but incomplete reasoning
+                Partially Clear: Logic is articulated, but reasoning not fully explained
               </SelectItem>
               <SelectItem value="unclear">
                 Unclear: Vague or hard to follow
@@ -642,7 +648,7 @@ export const AnnotationForm = ({
                 No: Agent misunderstood or ignored important information
               </SelectItem>
               <SelectItem value="na">
-                N/A: Next action not yet available
+                N/A: Next action not yet available OR not given
               </SelectItem>
             </SelectContent>
           </Select>
@@ -736,7 +742,7 @@ export const AnnotationForm = ({
                 htmlFor="premature-conclusion"
                 className="font-sans font-normal cursor-pointer"
               >
-                Premature Conclusion: Agent stops before fully solving the issue
+                Premature Conclusion: Incomplete or partial action. Agent stops before fully solving the issue
               </Label>
             </div>
             <div className="flex items-center space-x-2">
@@ -751,6 +757,20 @@ export const AnnotationForm = ({
                 className="font-sans font-normal cursor-pointer"
               >
                 Scope Creep: Agent makes unrelated or unnecessary changes
+              </Label>
+            </div>
+            <div className="flex items-center space-x-2">
+              <Checkbox
+                id="deviation"
+                checked={errorFlags.deviation}
+                onCheckedChange={() => toggleErrorFlag("deviation")}
+                disabled={!taskNumber || saving === "errorFlags"}
+              />
+              <Label
+                htmlFor="deviation"
+                className="font-sans font-normal cursor-pointer"
+              >
+                Deviation: If a plan was given, agent deviates from user or agent plan
               </Label>
             </div>
             <div className="flex items-center space-x-2">
@@ -779,7 +799,7 @@ export const AnnotationForm = ({
                   htmlFor="other-error"
                   className="font-sans font-normal cursor-pointer"
                 >
-                  Other
+                  Other: Error not listed above, or annotator wants to provide additional context.
                 </Label>
               </div>
               {errorFlags.other && (
