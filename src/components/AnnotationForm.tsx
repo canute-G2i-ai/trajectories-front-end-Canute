@@ -508,7 +508,7 @@ export const AnnotationForm = ({
           <Select
             value={actionCategory}
             onValueChange={handleActionCategoryChange}
-            disabled={!taskNumber || saving === "actionCategory"}
+            disabled={!taskNumber}
           >
             <SelectTrigger id="action-category" className="font-sans">
               <SelectValue placeholder="Select action category" />
@@ -553,7 +553,7 @@ export const AnnotationForm = ({
           <Select
             value={actionCorrectness}
             onValueChange={handleActionCorrectnessChange}
-            disabled={!taskNumber || saving === "actionCorrectness"}
+            disabled={!taskNumber}
           >
             <SelectTrigger id="action-correctness" className="font-sans">
               <SelectValue placeholder="Select correctness level" />
@@ -589,7 +589,7 @@ export const AnnotationForm = ({
           <Select
             value={reasoningQuality}
             onValueChange={handleReasoningQualityChange}
-            disabled={!taskNumber || saving === "reasoningQuality"}
+            disabled={!taskNumber}
           >
             <SelectTrigger id="reasoning-quality" className="font-sans">
               <SelectValue placeholder="Select reasoning quality" />
@@ -629,7 +629,7 @@ export const AnnotationForm = ({
           <Select
             value={sandboxResponse}
             onValueChange={handleSandboxResponseChange}
-            disabled={!taskNumber || saving === "sandboxResponse"}
+            disabled={!taskNumber}
           >
             <SelectTrigger id="sandbox-response" className="font-sans">
               <SelectValue placeholder="Select interpretation" />
@@ -665,7 +665,7 @@ export const AnnotationForm = ({
                 id="hallucination"
                 checked={errorFlags.hallucination}
                 onCheckedChange={() => toggleErrorFlag("hallucination")}
-                disabled={!taskNumber || saving === "errorFlags"}
+                disabled={!taskNumber}
               />
               <Label
                 htmlFor="hallucination"
@@ -679,7 +679,7 @@ export const AnnotationForm = ({
                 id="repetition-loop"
                 checked={errorFlags.repetitionLoop}
                 onCheckedChange={() => toggleErrorFlag("repetitionLoop")}
-                disabled={!taskNumber || saving === "errorFlags"}
+                disabled={!taskNumber}
               />
               <Label
                 htmlFor="repetition-loop"
@@ -693,7 +693,7 @@ export const AnnotationForm = ({
                 id="misdiagnosis"
                 checked={errorFlags.misdiagnosis}
                 onCheckedChange={() => toggleErrorFlag("misdiagnosis")}
-                disabled={!taskNumber || saving === "errorFlags"}
+                disabled={!taskNumber}
               />
               <Label
                 htmlFor="misdiagnosis"
@@ -707,7 +707,7 @@ export const AnnotationForm = ({
                 id="tool-misuse"
                 checked={errorFlags.toolMisuse}
                 onCheckedChange={() => toggleErrorFlag("toolMisuse")}
-                disabled={!taskNumber || saving === "errorFlags"}
+                disabled={!taskNumber}
               />
               <Label
                 htmlFor="tool-misuse"
@@ -721,7 +721,7 @@ export const AnnotationForm = ({
                 id="ignored-feedback"
                 checked={errorFlags.ignoredFeedback}
                 onCheckedChange={() => toggleErrorFlag("ignoredFeedback")}
-                disabled={!taskNumber || saving === "errorFlags"}
+                disabled={!taskNumber}
               />
               <Label
                 htmlFor="ignored-feedback"
@@ -736,7 +736,7 @@ export const AnnotationForm = ({
                 id="premature-conclusion"
                 checked={errorFlags.prematureConclusion}
                 onCheckedChange={() => toggleErrorFlag("prematureConclusion")}
-                disabled={!taskNumber || saving === "errorFlags"}
+                disabled={!taskNumber}
               />
               <Label
                 htmlFor="premature-conclusion"
@@ -750,7 +750,7 @@ export const AnnotationForm = ({
                 id="scope-creep"
                 checked={errorFlags.scopeCreep}
                 onCheckedChange={() => toggleErrorFlag("scopeCreep")}
-                disabled={!taskNumber || saving === "errorFlags"}
+                disabled={!taskNumber}
               />
               <Label
                 htmlFor="scope-creep"
@@ -764,7 +764,7 @@ export const AnnotationForm = ({
                 id="deviation"
                 checked={errorFlags.deviation}
                 onCheckedChange={() => toggleErrorFlag("deviation")}
-                disabled={!taskNumber || saving === "errorFlags"}
+                disabled={!taskNumber}
               />
               <Label
                 htmlFor="deviation"
@@ -778,7 +778,7 @@ export const AnnotationForm = ({
                 id="na"
                 checked={errorFlags.na}
                 onCheckedChange={() => toggleErrorFlag("na")}
-                disabled={!taskNumber || saving === "errorFlags"}
+                disabled={!taskNumber}
               />
               <Label
                 htmlFor="na"
@@ -793,7 +793,7 @@ export const AnnotationForm = ({
                   id="other-error"
                   checked={errorFlags.other}
                   onCheckedChange={() => toggleErrorFlag("other")}
-                  disabled={!taskNumber || saving === "errorFlags"}
+                  disabled={!taskNumber}
                 />
                 <Label
                   htmlFor="other-error"
