@@ -617,14 +617,13 @@ export const AnnotationForm = ({
           </Select>
         </div>
 
-        {/* Sandbox Response Interpretation */}
+        {/* Interpretation of System Output */}
         <div className="space-y-2">
           <Label htmlFor="sandbox-response" className="font-sans">
-            Sandbox Response Interpretation
+            Interpretation of System Output
           </Label>
           <div className="text-sm text-muted-foreground mb-2 font-sans">
-            Did the agent correctly interpret the sandbox response in their next
-            action?
+            Did the agent understand the feedback from the environment and apply it correctly in the user step?
           </div>
           <Select
             value={sandboxResponse}
